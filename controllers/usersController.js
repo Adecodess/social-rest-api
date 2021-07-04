@@ -23,7 +23,7 @@ exports.updateUser = async (req, res) => {
   } else {
     return res
       .status(403)
-      .json({ message: "You can only update your Account", user });
+      .json({ message: "You can only update your Account" });
   }
 };
 

@@ -1,5 +1,5 @@
 const Post = require("../models/Post");
-// const User = require("../models/User");
+const User = require("../models/User");
 
 // create a post
 
@@ -72,24 +72,19 @@ exports.getPost = async (req, res) => {
 
 exports.timelinePost = async (req, res) => {
   try {
-    const userPosts = await Post.find({ userId: req.body.userId }).populate("userId")
-    // if you want to include all info about the user, then use the query below.
-    // you can uncomment and see for learning purpose
-    // const userPosts = await Post.find({ userId: req.body.userId }).populate("userId");
-    
-    // get the current user from the returned result 
-    let currentUser = userPosts[0].userId;
-    
-    // loop over the followings and add their own before sending
+    const currentUser = await User.findById(req.body.userId);
+    const userPosts = await Post.find({ userId: currentUser._id });
+
+    // iterate over the followings and add their own before sending
     const friendPosts = await Promise.all(
       currentUser.followings.map((friendId) => {
         return Post.find({ userId: friendId });
       })
-      );
+    );
+    // add the two arrays together
     res.json(userPosts.concat(...friendPosts));
-      // res.send(userPosts)
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json(error);
   }
 };

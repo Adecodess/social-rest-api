@@ -4,7 +4,7 @@ const { authUser } = require("../middlewares/auth");
 const UserCtrl = require("../controllers/usersController");
 
 // update user
-router.put("/:id", UserCtrl.updateUser);
+router.put("/updateuser/:id", UserCtrl.updateUser);
 
 // delete user
 router.delete("/:id", UserCtrl.deleteUser);
