@@ -43,7 +43,7 @@ exports.registerNewUser = async (req, res) => {
       .status(200)
       .json({ message: "user registration successful", token, user });
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json( error.message);
   }
 };
 

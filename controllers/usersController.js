@@ -45,6 +45,7 @@ exports.deleteUser = async (req, res) => {
 
 // get user
 exports.findUser = async (req, res) => {
+  console.log(req.params.id)
   try {
     const user = await User.findById(req.params.id);
     const { password, updatedAt, ...other } = user._doc;
@@ -56,6 +57,20 @@ exports.findUser = async (req, res) => {
 
 // follow a user
 exports.followUser = async (req, res) => {
+  // rewrite this logic with return early statements to make it clearer
+
+  // for example
+  // if ( req.body.userId !== req.params.id ){
+  //   return res.status(403).json({ message: "your cant follow yourself" });
+  // notice the early return principle working here
+  // }
+
+  // try { 
+  //   const user = await User.findById(req.params.id);
+  // }catch(err){
+
+  // }
+
   if (req.body.userId !== req.params.id) {
     try {
       const user = await User.findById(req.params.id);
