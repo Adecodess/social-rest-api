@@ -23,7 +23,7 @@ exports.updateUser = async (req, res) => {
   } else {
     return res
       .status(403)
-      .json({ message: "You can only update your Account" });
+      .json({ message: "You can only update your Account", user });
   }
 };
 
@@ -45,7 +45,7 @@ exports.deleteUser = async (req, res) => {
 
 // get user
 exports.findUser = async (req, res) => {
-  console.log(req.params.id)
+  console.log(req.params.id);
   try {
     const user = await User.findById(req.params.id);
     const { password, updatedAt, ...other } = user._doc;
@@ -65,7 +65,7 @@ exports.followUser = async (req, res) => {
   // notice the early return principle working here
   // }
 
-  // try { 
+  // try {
   //   const user = await User.findById(req.params.id);
   // }catch(err){
 

@@ -11,7 +11,7 @@
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const cookieparser = require("cookie-parser")
+const cookieparser = require("cookie-parser");
 
 require("dotenv").config();
 
@@ -23,28 +23,28 @@ connectDB();
 
 // initalise express
 const app = express();
-app.use(cookieparser())
+app.use(cookieparser());
 // require routes
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 
 // initialise  middleware
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ extended: false }));
 app.use(helmet());
 app.use(morgan("common"));
 
-app.use("/api/user", userRoute);
+app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRoute);
 
-app.use("", ( req, res, next )=>{
+app.use("", (req, res, next) => {
   res.status(404).send({
-    status:"Not found",
-    message:`${req.url} does not exist or does not support ${req.method} requests, contact the developer`
-  })
-})
+    status: "Not found",
+    message: `${req.url} does not exist or does not support ${req.method} requests, contact the developer`,
+  });
+});
 // port
 const port = process.env.PORT || PORT;
 

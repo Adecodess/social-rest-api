@@ -10,7 +10,7 @@ router.put("/:id", UserCtrl.updateUser);
 router.delete("/:id", UserCtrl.deleteUser);
 
 // get user
-router.get(":id", UserCtrl.findUser);
+router.get("/:id", UserCtrl.findUser);
 
 // follow user
 router.put("/:id/follow", UserCtrl.followUser);
